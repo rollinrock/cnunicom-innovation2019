@@ -17,25 +17,35 @@
           </el-col>
         </el-row>
       </el-header>
-      <el-aside>
-        <el-menu default-active="1">
-          <el-menu-item index="1"><i class="el-icon-s-home"></i>首页</el-menu-item>
-          <el-menu-item index="2"><i class="el-icon-location"></i>宏站选址</el-menu-item>
-        </el-menu>
-      </el-aside>
-      <el-main></el-main>
+      <el-container class="content-wrapper">
+        <el-aside>
+          <el-menu default-active="1">
+            <el-menu-item index="1" @click="showHome=true"><i class="el-icon-s-home"></i>首页</el-menu-item>
+            <el-menu-item index="2" @click="showHome=false"><i class="el-icon-location"></i>宏站选址</el-menu-item>
+          </el-menu>
+        </el-aside>
+        <el-main class="content">
+          <map-locater v-if="showHome===false"></map-locater>
+          <p v-if="showHome===true">首页内容</p>
+        </el-main>
+      </el-container>
       <!-- <el-footer><p>copyright</p></el-footer> -->
     </el-container>
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
+import MapLocater from './components/MapLocater.vue'
 
 export default {
   name: 'app',
   components: {
-    // HelloWorld
+    MapLocater
+  },
+  data() {
+    return {
+      showHome: true
+    }
   },
   methods: {
     showInfo() {
@@ -78,8 +88,16 @@ export default {
   float: right;
 }
 
+.content-wrapper {
+  height: 800px;
+}
 
-
+.content {
+  /* background-color: #f2f2f2; */
+  width: 100%;
+  height: 800px;
+  /* padding: 20px; */
+}
 
 
 
